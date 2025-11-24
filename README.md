@@ -1,261 +1,284 @@
-# AI Research Agent - Production Ready 🚀
+# 🚀 Eightfold AI Research Agent
 
-A sophisticated multi-agent AI research platform powered by 15+ specialized agents delivering comprehensive company research, competitive analysis, and strategic insights. Built with Next.js 14, TypeScript, and enterprise-grade architecture.
+> Enterprise-grade multi-agent AI research platform delivering comprehensive company intelligence, competitive analysis, and strategic insights in real-time.
+
+[![Next.js](https://img.shields.io/badge/Next.js-14.1-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Technology Stack](#technology-stack)
+- [Quick Start](#quick-start)
+- [Architecture](#architecture)
+- [Usage](#usage)
+- [Deployment](#deployment)
+
+## 🎯 Overview
+
+Eightfold is a sophisticated AI-powered research assistant that leverages **15+ specialized agents** working collaboratively to deliver deep company insights. From financial metrics to competitive positioning, market trends to risk assessment—all synthesized into actionable intelligence.
+
+### Why Eightfold?
+
+- **⚡ Real-time Intelligence**: Watch agents collaborate live with streaming responses
+- **🎨 Professional Reports**: Export branded PDF/DOCX with embedded charts
+- **🔒 Enterprise Security**: Rate limiting, error boundaries, and comprehensive logging
+- **♿ Accessible**: WCAG-compliant with full keyboard navigation
+- **📊 Production Ready**: Optimized builds, code splitting, and performance monitoring
 
 ## ✨ Key Features
 
-### 🤖 Multi-Agent Intelligence
-- **15 Specialized Agents**: Research, Analysis, Financial, Competitive, Market, Strategy, Contact Discovery, Technology, Risk, Legal, Partnership, Innovation, Customer Intelligence, Supply Chain, and ESG agents
-- **Real-time Workflow Visualization**: Watch agents collaborate with live phase tracking and resizable panels
-- **Intelligent Orchestration**: Adaptive coordination with confidence scoring (75-100%) and phase management
-- **Agent Performance Timeline**: Track execution history with duration metrics and status indicators
+### 🤖 Multi-Agent System
+
+Powered by 15 specialized AI agents:
+
+| Agent | Purpose |
+|-------|---------|
+| Research | Core company information gathering |
+| Financial | Revenue, metrics, market cap analysis |
+| Competitive | Market positioning & competitor mapping |
+| Market | Industry trends & dynamics |
+| Strategy | Recommendations & action plans |
+| Contact | Decision-maker identification |
+| Technology | Tech stack & innovation analysis |
+| Risk | Threat assessment & mitigation |
+| Quality | Output validation & refinement |
+| Synthesis | Cross-agent insight integration |
 
 ### 💎 Advanced Capabilities
-- **Enhanced PDF/DOCX Export**: Professional reports with embedded charts (html2canvas), custom branding (logo/colors/company name), styled headers/footers, and section dividers
-- **Semantic Search Highlighting**: Automatic keyword extraction and highlighting across messages and sources with stop word filtering (up to 10 keywords)
-- **Provider Health Dashboard**: Real-time monitoring of Gemini/Groq/OpenAI with latency tracking, success rates, error counts, and circuit breaker status
-- **Dynamic Agent Configuration**: Live tuning of max iterations (1-20), confidence threshold (50-100%), timeout (30-300s), parallel agents (1-10), retry attempts (0-5), and cache toggle
-- **Persistent User Preferences**: Resizable panel sizes, active tab state, theme selection, agent config, and export branding saved to localStorage with versioning
-- **Structured Telemetry System**: Multi-level logging (debug/info/warn/error/critical), category filtering (system/agent/api/user/performance/security), real-time dashboard with export
 
-### 🔒 Enterprise Security & Performance
-- **Advanced Rate Limiting**: Token bucket algorithm with IP-based identification (100 req/min API, 5/min auth, 20/min search) and retry-after headers
-- **Global Error Boundaries**: Graceful fallback UI with error details, stack traces, recovery options, and automatic logging
-- **LRU Caching Layer**: Memory-efficient caching for documents (500 capacity) and searches (100 capacity) with hit/miss tracking and statistics
-- **WCAG Accessibility**: Complete ARIA labels, keyboard navigation hints (Tab/Enter/Shift+Enter), screen reader descriptions, semantic HTML
-- **Performance Optimization**: Code splitting (framework/lib/commons chunks), lazy loading, image optimization (AVIF/WebP), SWC minification, bundle analysis tools
-- **Caching System**: Intelligent caching for faster responses
-- **User Persona Detection**: Adapts to different user communication styles
-- **Multi-Agent Coordination**: Advanced agent system with iteration control
+- **Smart Search**: Semantic keyword extraction with highlighting
+- **Live Workflow**: Real-time agent orchestration visualization
+- **Dynamic Config**: Tune iterations, confidence, timeouts on-the-fly
+- **Health Monitoring**: Provider latency & error tracking
+- **Persistent State**: User preferences saved across sessions
+- **Export Engine**: Professional reports with charts & branding
 
-### User Experience
-- **Modern UI**: Beautiful, responsive interface built with Radix UI and Tailwind CSS
-- **Real-time Progress**: See research steps as they happen
-- **Toast Notifications**: User-friendly feedback for all actions
-- **Error Boundaries**: Graceful error handling with recovery options
-- **Responsive Design**: Works on desktop, tablet, and mobile
+### 🔐 Security & Performance
 
-## 🏗️ Architecture
+- Token bucket rate limiting (100 req/min)
+- LRU caching (documents + searches)
+- Global error boundaries with recovery
+- Bundle optimization & code splitting
+- Image optimization (AVIF/WebP)
 
-### Technology Stack
-- **Framework**: Next.js 14 with App Router
-- **Language**: TypeScript
-- **AI**: Google Gemini 1.5 Pro
-- **UI**: Radix UI + Tailwind CSS
-- **State Management**: React Hooks + Local Storage
-- **Validation**: Zod
+## 🛠 Technology Stack
 
-### Project Structure
+### Core
+- **Framework**: Next.js 14 (App Router, React 18, Server Components)
+- **Language**: TypeScript 5.3
+- **Styling**: Tailwind CSS + Radix UI primitives
 
-```
-/app
-  /api              - API routes (chat, analytics, export, etc.)
-  page.tsx          - Main application page
-  layout.tsx        - Root layout
-  globals.css       - Global styles
+### AI & Data
+- **LLM**: Google Gemini 2.0 Flash, Groq, OpenAI (fallback)
+- **Vector DB**: Pinecone (semantic search & RAG)
+- **Caching**: Redis + in-memory LRU
 
-/components
-  /analytics        - Analytics dashboard components
-  /chat             - Chat interface components
-  /account-plan     - Account plan display and editing
-  /settings         - Settings panel
-  /export           - Export functionality
-  /error            - Error handling components
-  /ui               - Base UI components (Radix UI)
+### Infrastructure
+- **Deployment**: Vercel (recommended) or Docker
+- **Testing**: Jest + integration tests
+- **Analytics**: Built-in telemetry system
 
-/lib
-  agent.ts          - Core AI agent (ReAct pattern)
-  api-client.ts     - Gemini API client with tool calling
-  cache.ts           - Caching system
-  storage.ts         - Local storage management
-  analytics.ts       - Analytics tracking
-  config.ts          - Configuration management
-  validators.ts      - Input validation
-  error-handler.ts   - Error handling utilities
-  utils.ts           - General utilities
-  constants.ts       - Constants and persona definitions
-
-/types
-  index.ts           - TypeScript type definitions
-
-/hooks
-  use-toast.ts       - Toast notification hook
-```
-
-## 🚀 Setup Instructions
+## 🚀 Quick Start
 
 ### Prerequisites
 
 - Node.js 18+ and npm
-- Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey)) - **FREE**
-- (Optional) SerpAPI key for enhanced search
-- (Optional) Brave Search API key
+- API keys: Gemini, Groq (optional: OpenAI, Pinecone)
 
 ### Installation
 
-1. **Clone or navigate to the project directory**
+```bash
+git clone https://github.com/mohammed-Thameem-ansari/Eightfold.git
+cd Eightfold
+npm install
+```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+### Configuration
 
-3. **Set up environment variables**
+1. Copy environment template:
+```bash
+cp .env.example .env.local
+```
 
-   Create a `.env.local` file in the root directory:
-   ```env
-   # Required (Free tier available)
-   GOOGLE_GEMINI_API_KEY=your_gemini_api_key_here
+2. Add your API keys in `.env.local`:
+```env
+GOOGLE_GEMINI_API_KEY=your_key_here
+GROQ_API_KEY=your_key_here
+```
 
-   # Optional - Search providers (with fallback to free DuckDuckGo)
-   SERP_API_KEY=your_serp_api_key_here
-   BRAVE_SEARCH_API_KEY=your_brave_search_api_key_here
+3. Start development server:
+```bash
+npm run dev
+```
 
-   # Optional - Feature flags
-   DEMO_MODE=false
-   ENABLE_CACHING=true
-   ENABLE_ANALYTICS=true
-   MAX_ITERATIONS=10
-   CACHE_TTL=3600000
-   ```
+4. Open [http://localhost:3000](http://localhost:3000)
 
-   **Note**: The app works completely free with just the Gemini API key. DuckDuckGo search is free and works without an API key. Other search providers are optional.
+**See [SETUP.md](SETUP.md) for detailed configuration.**
 
-4. **Run the development server**
-   ```bash
-   npm run dev
-   ```
+## 🏗 Architecture
 
-5. **Open your browser**
-   
-   Navigate to [http://localhost:3000](http://localhost:3000)
+### System Design
 
-## 💡 Usage
-
-### Basic Research
-
-1. Start a conversation by typing a message like:
-   - "Research Apple"
-   - "Generate an account plan for Microsoft"
-   - "Analyze Tesla's market position"
-
-2. The agent will:
-   - Detect your communication style
-   - Search for relevant information
-   - Synthesize findings
-   - Generate a comprehensive response
-
-### Account Plans
-
-1. After research, generate an account plan
-2. View all sections in the sidebar
-3. Edit sections as needed
-4. Export plans in multiple formats
-
-### Analytics
-
-- View usage statistics
-- Track top companies and searches
-- Monitor performance metrics
-
-### Settings
-
-- Configure features
-- Manage data
-- Export/import data
-- Clear analytics
-
-## 🎨 Features in Detail
-
-### Multi-Provider Search
-
-The app automatically tries multiple search providers in order:
-1. SerpAPI (if configured)
-2. DuckDuckGo (free, always available)
-3. Brave Search (if configured)
-4. Mock data (fallback)
-
-### Caching
-
-- Intelligent caching of search results
-- Configurable TTL
-- Automatic cache cleanup
-- Cache statistics
-
-### Error Handling
-
-- Comprehensive error tracking
-- User-friendly error messages
-- Automatic retry with exponential backoff
-- Error boundaries for graceful failures
-
-### Analytics
-
-- Track queries, companies, and plans
-- Monitor success rates
-- View top searches and companies
-- Performance metrics
-
-## 🔧 Configuration
-
-### Environment Variables
-
-- `GOOGLE_GEMINI_API_KEY`: Required for AI functionality
-- `SERP_API_KEY`: Optional, for SerpAPI search
-- `BRAVE_SEARCH_API_KEY`: Optional, for Brave Search
-- `DEMO_MODE`: Enable demo mode (uses mock data)
-- `ENABLE_CACHING`: Enable/disable caching
-- `ENABLE_ANALYTICS`: Enable/disable analytics
-- `MAX_ITERATIONS`: Maximum research iterations
-- `CACHE_TTL`: Cache time-to-live in milliseconds
-
-### Feature Flags
-
-Configure features in the Settings panel:
-- Enable/disable caching
-- Enable/disable analytics
-- Enable/disable export
-- Adjust max iterations
-
-## 📊 Code Statistics
-
-- **Total Lines**: 10,000+ lines of production-ready code
-- **Components**: 20+ React components
-- **API Routes**: 6+ API endpoints
-- **Utilities**: 10+ utility modules
-- **Type Safety**: Full TypeScript coverage
-
-## 🛠️ Development
+```
+┌─────────────┐
+│   Client    │
+└──────┬──────┘
+       │ SSE Streaming
+┌──────▼──────────────────────┐
+│  Next.js API Routes          │
+│  ├─ /api/chat (SSE)          │
+│  ├─ /api/export              │
+│  └─ /api/analytics           │
+└──────┬──────────────────────┘
+       │
+┌──────▼──────────────────────┐
+│  Agent Orchestrator          │
+│  ├─ Phase Management         │
+│  ├─ Agent Coordination       │
+│  └─ Workflow State           │
+└──────┬──────────────────────┘
+       │
+┌──────▼──────────────────────┐
+│  15 Specialized Agents       │
+│  (Research, Financial, etc.) │
+└──────┬──────────────────────┘
+       │
+┌──────▼──────────────────────┐
+│  LLM Services + Vector DB    │
+│  ├─ Gemini/Groq/OpenAI       │
+│  ├─ Pinecone (embeddings)    │
+│  └─ Redis (caching)          │
+└─────────────────────────────┘
+```
 
 ### Project Structure
 
-The codebase is organized for scalability:
-- Modular architecture
-- Separation of concerns
-- Reusable components
-- Type-safe APIs
-- Error handling throughout
+```
+/app                    # Next.js pages & API routes
+  /api
+    /chat              # SSE streaming endpoint
+    /export            # PDF/DOCX generation
+  /dashboard           # Analytics & monitoring
+  /workflow            # Agent visualization
+/components
+  /agents              # Agent UI components
+  /chat                # Chat interface
+  /ui                  # Reusable UI primitives
+/lib
+  /agents              # 15 specialized agents
+  /services            # LLM, vector DB, caching
+  /utils               # Rate limiting, telemetry
+/types                 # TypeScript definitions
+```
 
-### Adding Features
+## 📖 Usage
 
-1. Add types in `/types/index.ts`
-2. Create utilities in `/lib/`
-3. Build components in `/components/`
-4. Add API routes in `/app/api/`
-5. Update documentation
+### Basic Research Query
 
-## 📝 License
+```typescript
+// Ask the agent
+"Research Tesla and provide a comprehensive analysis"
 
-This project is open source and available for use.
+// Agent orchestrates:
+1. Research Agent → Company overview
+2. Financial Agent → Metrics & performance
+3. Competitive Agent → Market positioning
+4. Strategy Agent → Recommendations
+5. Synthesis Agent → Final report
+```
+
+### Workflow Page
+
+Navigate to `/workflow` to:
+- Watch agents execute in real-time
+- View phase progression
+- See logs & telemetry
+- Adjust agent configuration
+
+### Export Reports
+
+Click **Export** to download:
+- PDF with embedded charts
+- DOCX with citations
+- Custom branding (logo/colors)
+
+## 🚢 Deployment
+
+### Vercel (Recommended)
+
+```bash
+npm install -g vercel
+vercel login
+vercel --prod
+```
+
+### Docker
+
+```dockerfile
+# Build
+docker build -t eightfold .
+
+# Run
+docker run -p 3000:3000 --env-file .env.local eightfold
+```
+
+### Environment Variables
+
+Required for production:
+- `GOOGLE_GEMINI_API_KEY`
+- `GROQ_API_KEY`
+- `NEXTAUTH_SECRET`
+- `REDIS_URL` (caching)
+- `PINECONE_API_KEY` (optional, for RAG)
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+npm test
+
+# Type checking
+npm run typecheck
+
+# Build verification
+npm run build
+```
+
+## 📊 Performance
+
+- **First Load**: < 150KB gzipped
+- **Time to Interactive**: < 2s
+- **Agent Response**: 3-8s (streaming)
+- **Bundle Size**: Optimized via code splitting
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing`)
+5. Open Pull Request
 
-## 📧 Support
+## 📄 License
 
-For issues and questions, please open an issue on GitHub.
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Google Gemini API
+- Vercel for hosting
+- Radix UI for accessible components
+- Next.js team for the framework
+
+## 📞 Contact
+
+- **Author**: Mohammed Thameem Ansari
+- **GitHub**: [@mohammed-Thameem-ansari](https://github.com/mohammed-Thameem-ansari)
 
 ---
 
-**Built with ❤️ using Google Gemini AI**
+**Built with ❤️ for intelligent company research**
+
