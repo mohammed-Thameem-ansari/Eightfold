@@ -1,0 +1,186 @@
+// Prisma schema for research agent
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// User model
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String?  // Hashed password
+  image     String?
+  role      Role     @default(USER)
+  
+  sessions  Session[]
+  plans     AccountPlan[]
+  apiKeys   ApiKey[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+enum Role {
+  USER
+  ADMIN
+  PREMIUM
+}
+
+// Session model
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  sessionToken String   @unique
+  expires      DateTime
+  
+  messages  Message[]
+  metadata  Json?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([sessionToken])
+}
+
+// Message model
+model Message {
+  id        String   @id @default(cuid())
+  sessionId String
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  role      String   // user | assistant | system
+  content   String   @db.Text
+  sources   Json?    // Array of sources
+  toolCalls Json?    // Array of tool calls
+  metadata  Json?
+  
+  createdAt DateTime @default(now())
+
+  @@index([sessionId])
+  @@index([createdAt])
+}
+
+// Account Plan model
+model AccountPlan {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  companyName String
+  sections    PlanSection[]
+  sources     Json?    // Array of sources
+  confidence  Float?
+  completeness Float?
+  
+  status      PlanStatus @default(DRAFT)
+  metadata    Json?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([companyName])
+  @@index([status])
+}
+
+enum PlanStatus {
+  DRAFT
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+}
+
+// Plan Section model
+model PlanSection {
+  id        String   @id @default(cuid())
+  planId    String
+  plan      AccountPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  
+  type      String   // overview | market-position | decision-makers | etc.
+  title     String
+  content   String   @db.Text
+  sources   Json?
+  confidence Float?
+  
+  version   Int      @default(1)
+  metadata  Json?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([planId])
+  @@index([type])
+}
+
+// API Key model (for user-specific API keys)
+model ApiKey {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name      String   // e.g., "Production API", "Testing"
+  key       String   @unique
+  provider  String   // gemini | openai | serp | etc.
+  
+  isActive  Boolean  @default(true)
+  lastUsed  DateTime?
+  usageCount Int     @default(0)
+  
+  createdAt DateTime @default(now())
+  expiresAt DateTime?
+
+  @@index([userId])
+  @@index([key])
+}
+
+// Analytics event model
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  
+  eventType String   // query | tool_call | agent_execution | error
+  eventName String
+  userId    String?
+  sessionId String?
+  
+  data      Json?    // Event-specific data
+  metrics   Json?    // duration, tokens, cost, etc.
+  
+  success   Boolean  @default(true)
+  error     String?
+  
+  createdAt DateTime @default(now())
+
+  @@index([eventType])
+  @@index([userId])
+  @@index([sessionId])
+  @@index([createdAt])
+}
+
+// Research cache model
+model ResearchCache {
+  id        String   @id @default(cuid())
+  
+  query     String   @db.Text
+  queryHash String   @unique
+  
+  result    Json     // Cached result
+  sources   Json?
+  
+  hits      Int      @default(0)
+  lastHit   DateTime @default(now())
+  
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([queryHash])
+  @@index([expiresAt])
+}

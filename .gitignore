@@ -1,0 +1,133 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env files
+.env.local
+.env.*.local
+.env
+!.env.example
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Coverage
+coverage/
+
+# Misc caches
+.turbo/
+.parcel-cache/
+
+# Prisma
+prisma/*.log
+
+# Puppeteer / Playwright
+.cache/
+
+# Generated exports
+exported-reports/
+
+# Python virtual env (if any)
+.venv/
+
+# Redis dump (if accidentally placed)
+dump.rdb
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+!.env.example
+
+# python virtual environment (if any)
+.venv/
+
+# logs & runtime artifacts
+*.log
+logs/
+.dev_server.log
+.dev_server.err.log
+.dev_server.out.log
+
+# editor & OS noise
+.vscode/
+Thumbs.db
+*.swp
+
+# build caches
+.turbo/
+.cache/
+
+# puppeteer / chromium downloads
+.local-chromium/
+
+# prisma generated client (keep schema, ignore migrations if desired)
+prisma/migrations/*.tmp
+
+# socket.io temp
+*.sock
+
+# coverage & reports
+coverage/
+*.lcov
+
+# export artifacts
+exports/
+*.pdf
+*.docx
+
+# RAG vector cache (if persisted locally)
+vector-cache/
+
+# Redis dump / DB dumps
+dump.rdb
+*.sql
+
+# Ignore SSE temp files
+.chat_response.sse
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
